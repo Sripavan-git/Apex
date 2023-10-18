@@ -1,0 +1,20 @@
+//Write a trigger on contact to prevent duplicate records based on Contact Email & Contact Phone.
+
+public class ContactDuplicates 
+{
+    public static void findDuplicates(List<Contact> newcontacts)
+    {
+        List<Contact> oldcontacts = [select Id,Email, Phone from Contact];
+        for(Contact con : newcontacts)
+        {
+            for(Contact cont : oldcontacts)
+            {
+                if(con.Email == cont.Email && con.Phone == cont.Phone)
+                {
+                    con.addError('Contact with the same name and email already exists');
+                }
+            }
+        }
+    }
+
+}
